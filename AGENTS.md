@@ -109,3 +109,31 @@ pwsh -NoProfile -File deploy.ps1 -BuildOnly  # só build local
 - Não commitar `*.pdf` — conteúdo de referência, permanece local
 - Não criar rotas dinâmicas — o site é 100% estático (`output: 'static'` no `astro.config.mjs`)
 - Não remover `applyBaseStyles: false` do Tailwind — o reset CSS vem do `global.css`
+
+## 11. Imagens em `public/images/`
+
+As fotos de personagens/cenas vêm do PDF (`HYBRIS WORLD PROJECT GUIDE`). O fluxo de extração (scripts disponíveis em `.claude/`):
+
+1. **`.claude/extract_images.py`** — usa PyMuPDF (`pip install pymupdf`) para puxar imagens embarcadas do PDF para `.claude/pdf-images/`, nomeadas `p{página}_x{xref}_{w}x{h}.jpg`.
+2. **`.claude/render_pages.py`** — renderiza páginas do PDF como PNG para identificação visual.
+3. **`.claude/place_images.py`** — copia/renomeia para `public/images/<nome>.jpg`.
+
+Algumas particularidades aprendidas:
+- **Labels burnados:** páginas de "revelação" do PDF (tipo "MIDAS é Matthew Fletcher") têm o label gravado na própria imagem. Foi aceito mantê-los — o usuário confirmou que ficam OK dentro do polaroid frame.
+- **Frames pretos:** muitos xrefs únicos por página são polaroid borders/masks vazios (PIL extrai o JPEG cru sem o mask aplicado). Se ao visualizar o arquivo extraído você só vê preto, é um frame decorativo — descarte.
+- **Imagens compostas com mask:** algumas (ex: cena Thunderbolt em Emei Shan, página 28) não saem via xref. Solução: **renderizar a página inteira em alta resolução e cropar** a região do polaroid via PIL (`.claude/crop_p28.py` é o template).
+
+Para adicionar uma nova foto:
+1. Identifique a página do PDF onde a imagem aparece (use `hybris-guide.txt` ou `render_pages.py` para visualizar).
+2. Decida o nome do arquivo em `kebab-case` (ex: `melissa-gordon.jpg`).
+3. Coloque em `public/images/` (formato JPG, qualidade ~88, dimensões ~800×1000 para retratos / ~1200×800 para cenas).
+4. Referencie no `index.astro` via `<Polaroid src="/images/<nome>.jpg" alt="..." />` ou `<img>` direto.
+
+**Atalho de workflow:** se o usuário tiver a foto já cortada (sem labels ou borders), pode pasterar diretamente na conversa que o agente lê de `C:\Users\conta\.claude\image-cache\<uuid>\<n>.png` e converte para JPG no destino correto.
+
+## 12. Workflow do agente para mudanças visuais
+
+1. **Sempre rode o dev server** em background (`npm run dev`) para hot reload — ele costuma cair em `localhost:4321`, ou `4323` se 4321 estiver ocupada.
+2. **Use Playwright** para validar visualmente — `node .claude/snap.mjs <slide-id>` salva screenshot do slide em viewport 1500×820.
+3. **Confronte com o PDF original** — `render_pages.py` para gerar a referência ou consulte `hybris-guide.txt` para o texto.
+4. **Crossfade entre slides:** ao testar mudanças que dependem do estado em transição, injete `html { scroll-snap-type: none !important }` via Playwright `addStyleTag` para conseguir parar no meio do scroll (template em `.claude/snap-fade.mjs`).
