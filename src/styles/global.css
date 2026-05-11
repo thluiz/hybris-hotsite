@@ -14,11 +14,14 @@ html {
 body {
   height: 100%;
   margin: 0;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  /* Cormorant Garamond Regular has thin strokes; 500 (Medium) gives
-     it the presence Cormorant needs to stay legible on parchment. */
+  /* Body font is Bitter (slab serif) — chosen over Cormorant Garamond
+     because Cormorant's thin strokes washed out on the parchment ground.
+     Bitter sits closer to the PDF's American Typewriter and reads cleanly. */
+  font-family: 'Bitter', Georgia, serif;
   font-weight: 500;
   background-color: #b09060;
+  /* Subtle text-shadow gives ink-on-parchment definition. */
+  text-shadow: 0 1px 0 rgba(176, 144, 96, 0.4);
 }
 
 /* ── Full-screen section slides ───────────────────── */
@@ -98,6 +101,11 @@ body {
   padding: 1.4rem 1.8rem;
   color: #f0e8d0;
   backdrop-filter: blur(1px);
+  /* Inside cards we use Cormorant Garamond (cream-on-dark tolerates the
+     finer strokes and Cormorant's italics read beautifully). */
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 500;
+  text-shadow: none;
 }
 .card p { line-height: 1.65; }
 .card strong { color: #fff; font-weight: 700; }
