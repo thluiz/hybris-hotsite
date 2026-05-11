@@ -38,6 +38,34 @@ const { title = 'Hybris World' } = Astro.props;
       );
       document.querySelectorAll('.slide').forEach((s) => slideObs.observe(s));
 
+      // Scroll-driven crossfade: each slide's content fades based on how
+      // centered the slide is within the viewport. Slides off-screen sit
+      // at opacity 0; the centered slide at 1; transitioning slides cross-
+      // fade smoothly through the middle.
+      const fadeSlides = document.querySelectorAll('.slide');
+      const updateFades = () => {
+        const vh = window.innerHeight;
+        const vcenter = vh / 2;
+        fadeSlides.forEach((slide) => {
+          const rect = slide.getBoundingClientRect();
+          const center = rect.top + rect.height / 2;
+          // distance: 0 = perfectly centered, 1 = one viewport away
+          const distance = Math.abs(center - vcenter) / vh;
+          // Stay fully visible while within ~25% of center, then ramp down
+          const op = Math.max(0, Math.min(1, 1 - (distance - 0.25) * 2.5));
+          (slide as HTMLElement).style.setProperty('--content-opacity', String(op));
+        });
+      };
+      let scheduled = false;
+      window.addEventListener('scroll', () => {
+        if (!scheduled) {
+          scheduled = true;
+          requestAnimationFrame(() => { updateFades(); scheduled = false; });
+        }
+      }, { passive: true });
+      window.addEventListener('resize', updateFades);
+      updateFades();
+
       // Nav dot active state
       const dots = document.querySelectorAll('#nav-dots a');
       const slides = document.querySelectorAll('.slide');

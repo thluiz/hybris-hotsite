@@ -48,6 +48,14 @@ body {
 /* Raise all direct slide children above grain */
 .slide > * { position: relative; z-index: 2; }
 
+/* Scroll-driven crossfade: slide content fades based on how centered the
+   slide is in the viewport. The parchment background stays continuous so
+   transitions look smooth between adjacent slides. Lightning is excluded
+   so the bolt keeps its own pulse animation. */
+.slide > :not(.lightning) {
+  opacity: var(--content-opacity, 1);
+}
+
 /* ── HYBRIS logo ──────────────────────────────────── */
 .hybris-logo {
   font-family: 'Cinzel', serif;
