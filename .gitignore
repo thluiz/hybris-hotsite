@@ -1,6 +1,5 @@
 node_modules/
 dist/
 .astro/
-*.txt
-deploy.ps1
-C:\Users\conta\AppData\Local\Temp\
+*.pdf
+.claude/
