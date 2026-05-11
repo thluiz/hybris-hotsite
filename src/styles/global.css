@@ -14,7 +14,7 @@ html {
 body {
   height: 100%;
   margin: 0;
-  font-family: 'EB Garamond', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   background-color: #b09060;
 }
 
@@ -62,7 +62,7 @@ body {
 
 /* ── Section label (top-right tag) ───────────────── */
 .slide-label {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   color: rgba(255,255,255,0.88);
   line-height: 1.2;
@@ -114,13 +114,13 @@ body {
   color: rgba(255,255,255,0.45);
   font-size: 0.7rem;
   text-align: center;
-  font-family: 'EB Garamond', serif;
+  font-family: 'Cormorant Garamond', serif;
   padding: 0.5rem;
 }
 
 /* ── Attribution line (bottom) ───────────────────── */
 .attribution {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 0.88rem;
   color: rgba(255,255,255,0.8);
   text-align: center;
@@ -154,14 +154,51 @@ body {
 
 /* ── Lightning ────────────────────────────────────── */
 @keyframes bolt-pulse {
-  0%, 92%, 100% { opacity: 0.8; }
+  0%, 92%, 100% { opacity: 0.85; }
   93%  { opacity: 1;   }
-  94%  { opacity: 0.3; }
-  95%  { opacity: 0.9; }
-  96%  { opacity: 0.2; }
-  97%  { opacity: 0.85;}
+  94%  { opacity: 0.4; }
+  95%  { opacity: 0.95;}
+  96%  { opacity: 0.3; }
+  97%  { opacity: 0.9; }
 }
-.lightning { animation: bolt-pulse 9s infinite; }
+/* Lightning must escape the .slide > * { position: relative } rule */
+.slide > .lightning {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  animation: bolt-pulse 9s infinite;
+}
+
+/* On slides that aren't the hero cover, the lightning reads as a crack
+   in parchment — softer, slightly off-center, more subdued */
+.hybris-def-slide > .lightning {
+  opacity: 0.55;
+  animation-duration: 14s;
+  transform: translateX(-4%);
+}
+
+/* ── Platform tags (slide 03) ─────────────────────── */
+.platform-tag {
+  background: rgba(61, 43, 31, 0.78);
+  color: #f0e8d0;
+  border: 1px solid rgba(240, 232, 208, 0.18);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(40, 25, 10, 0.25);
+  white-space: nowrap;
+}
+
+/* ── Ionic column (slide 02) ─────────────────────── */
+.ionic-column {
+  position: absolute;
+  right: -40px;
+  bottom: 0;
+  width: clamp(280px, 32vw, 460px);
+  height: 92%;
+  z-index: 2;
+  opacity: 0.78;
+  pointer-events: none;
+  filter: drop-shadow(-8px 12px 18px rgba(40, 25, 10, 0.25));
+}
 
 /* ── Hero entry ───────────────────────────────────── */
 @keyframes hero-up {
