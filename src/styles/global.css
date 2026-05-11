@@ -15,6 +15,9 @@ body {
   height: 100%;
   margin: 0;
   font-family: 'Cormorant Garamond', Georgia, serif;
+  /* Cormorant Garamond Regular has thin strokes; 500 (Medium) gives
+     it the presence Cormorant needs to stay legible on parchment. */
+  font-weight: 500;
   background-color: #b09060;
 }
 
