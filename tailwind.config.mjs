@@ -12,7 +12,8 @@ export default {
       },
       fontFamily: {
         cinzel: ['Cinzel', 'serif'],
-        garamond: ['"EB Garamond"', 'Georgia', 'serif'],
+        garamond: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        typewriter: ['"Special Elite"', '"Courier Prime"', 'Courier', 'monospace'],
       },
     },
   },

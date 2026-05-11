@@ -51,31 +51,21 @@ const slides = [
   <!-- ══════════════════════════════════════════════ -->
   <!-- 02 · O QUE É HYBRIS                           -->
   <!-- ══════════════════════════════════════════════ -->
-  <section id="hybris-def" class="slide flex flex-col">
+  <section id="hybris-def" class="slide flex flex-col hybris-def-slide">
     <SlideHeader />
     <Lightning />
-    <div class="flex-1 flex flex-col items-center justify-center text-center px-8 gap-6">
-      <h2 class="font-cinzel font-bold text-ink/80 rv" style="font-size:clamp(1.4rem,3vw,2.2rem);">
-        O que é <strong class="text-ink">Hybris</strong>&thinsp;?
-      </h2>
-      <div class="font-garamond text-ink/75 rv d2 space-y-4" style="font-size:clamp(1.1rem,2.2vw,1.55rem);max-width:560px;line-height:1.7;">
-        <p>No grego antigo, <strong class="text-ink font-semibold">Hybris</strong> era<br/>o orgulho ou insolência diante dos deuses.</p>
-        <p>O exagero da sua melhor qualidade.</p>
-        <p>O erro de medida que levava o herói<br/>à sua própria ruína.</p>
-      </div>
-      <!-- Greek column silhouette (CSS) -->
-      <div class="absolute right-0 bottom-0 w-64 opacity-20 pointer-events-none rv d4 fr" aria-hidden="true">
-        <svg viewBox="0 0 160 400" fill="currentColor" class="text-ink/60">
-          <!-- Capital (ionic volutes) -->
-          <ellipse cx="80" cy="30" rx="75" ry="18"/>
-          <rect x="30" y="40" width="100" height="12" rx="4"/>
-          <!-- Shaft -->
-          <rect x="55" y="52" width="50" height="300" rx="4"/>
-          <!-- Base -->
-          <rect x="30" y="350" width="100" height="12" rx="3"/>
-          <rect x="15" y="362" width="130" height="16" rx="4"/>
-          <rect x="5"  y="378" width="150" height="18" rx="5"/>
-        </svg>
+    <div class="flex-1 flex items-center justify-center px-8">
+      <div class="card definition-card rv" style="max-width:640px;">
+        <h2 class="font-cinzel text-center mb-6"
+            style="font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:0.04em;color:#f5ecd2;">
+          O que é <strong style="color:#fff;font-weight:700;">Hybris</strong>&thinsp;?
+        </h2>
+        <div class="font-garamond text-center space-y-5"
+             style="font-size:clamp(1.05rem,1.9vw,1.4rem);line-height:1.7;">
+          <p>No grego antigo, <strong>Hybris</strong> era<br/>o orgulho ou insolência diante dos deuses.</p>
+          <p>O exagero da sua melhor qualidade.</p>
+          <p>O erro de medida que levava o herói<br/>à sua própria ruína.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -99,7 +89,7 @@ const slides = [
       <div class="rv d4 flex flex-wrap justify-center gap-2 mt-2" style="max-width:680px;">
         {['Livros Digitais','Audiolivros','Audiodramas','Graphic Novels',
           'Jogos de Tabuleiro','Videogames','Animações','Experiências Imersivas'].map(p => (
-          <span class="font-cinzel text-[0.62rem] tracking-[0.18em] uppercase px-3 py-1 border border-ink/25 text-ink/60">
+          <span class="platform-tag font-cinzel text-[0.62rem] tracking-[0.18em] uppercase px-3 py-1">
             {p}
           </span>
         ))}
