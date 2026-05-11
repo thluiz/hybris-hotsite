@@ -11,10 +11,14 @@ Este documento serve como a "Fonte da Verdade" para agentes de IA que realizam m
 ## 2. Stack Tecnológica
 - **Framework:** Astro (SSG).
 - **Estilização:** Tailwind CSS (Vanilla CSS para efeitos complexos).
-- **Tipografia:** 
-  - `Cinzel`: Títulos, logotipos e elementos épicos.
-  - `EB Garamond`: Texto de corpo, descrições e citações.
-- **Animações:** IntersectionObserver nativo para gatilhos de visibilidade.
+- **Tipografia** (definida em `tailwind.config.mjs` → `fontFamily`):
+  - `font-cinzel` → **Cinzel**: títulos, logotipos e elementos épicos.
+  - `font-garamond` → **Cormorant Garamond**: texto-corpo, descrições e citações. (O PDF usa American Typewriter no corpo, que é proprietária Apple; Cormorant Garamond foi escolhida como Google-Font próxima do estilo das sinopses do PDF.) **Atenção**: Cormorant Regular (400) é muito fina sobre pergaminho — o `body` em `global.css` usa `font-weight: 500` como default. Para textos em destaque, use `600` ou `700`.
+  - `font-typewriter` → **Special Elite** (fallback Courier Prime, Courier, monospace): disponível para labels/captions tipo "máquina de escrever". Ainda não usado em nenhum slide; conecte se precisar de um terceiro registro tipográfico.
+- **Animações:**
+  - `IntersectionObserver` em `Layout.astro` ativa a classe `.rv.visible` quando o slide tem 45%+ visível.
+  - **Crossfade scroll-driven** (também em `Layout.astro`): um listener de `scroll` calcula a distância do centro de cada `.slide` ao centro do viewport e seta `--content-opacity` (0..1) no slide. CSS aplica `opacity: var(--content-opacity, 1)` em `.slide > :not(.lightning)`. Resultado: conteúdo do slide saindo desbota enquanto o que entra aparece; o pergaminho de fundo permanece opaco entre slides; lightning mantém seu próprio `bolt-pulse`.
+- **Playwright** está em `devDependencies` para que agentes possam validar visualmente o resultado (`node .claude/snap.mjs <slide-id>` é o template — fica em `.claude/`, gitignorado).
 
 ## 3. Sistema de Design (Tokens Tailwind)
 Use sempre as cores estendidas em `tailwind.config.mjs`:
@@ -24,14 +28,25 @@ Use sempre as cores estendidas em `tailwind.config.mjs`:
 - `cream`: `#f0e8d0` (Fundo claro/papel).
 - `card`: `rgba(110,85,42,0.72)` (Fundo de cartões de texto).
 
+### Classes utilitárias em `global.css`
+- `.card` — bloco escuro semitransparente com texto cream, usado para sinopses e definições. Use justificado e com `max-width` em torno de 480-680px.
+- `.platform-tag` — pill dark para listas de plataforma/categoria sobre pergaminho (slide `projeto`). Garante legibilidade que `border + text-ink/25` não dava.
+- `.polaroid` — frame branco com sombra. Use o componente `<Polaroid />` em vez de aplicar manualmente.
+- `.hybris-def-slide > .lightning` — variante mais sutil do raio (opacity 0.55, transladado), usada quando o lightning é uma "rachadura no pergaminho" e não o raio dramático da capa.
+
+### Legibilidade sobre pergaminho
+- **Não use** `text-ink/55`, `text-ink/60`, `text-ink/75`, `text-ink/80` — Cormorant fica ilegível em ink translúcido sobre `#b09060`.
+- Use `text-ink` direto, ou no mínimo `text-ink/85` para labels e `text-ink/90`/`text-ink/95` para corpo.
+- Se for um bloco grande de texto sobre pergaminho, considere envolver em `.card` (mesma estética das sinopses do PDF) — slide 2 e várias sinopses fazem isso.
+
 ## 4. Estrutura de Componentes e Layout
-- **Slides:** O site é uma sucessão de seções com a classe `.slide`. Cada seção deve ocupar a tela inteira (ou ser auto-ajustável).
-- **Animações de Entrada:** Adicione a classe `.rv` (reveal) aos elementos que devem aparecer quando o slide entra em foco.
+- **Slides:** O site é uma sucessão de seções com a classe `.slide`. Cada seção ocupa 100vh com `scroll-snap-align: start`.
+- **Animações de Entrada:** Adicione a classe `.rv` (reveal) aos elementos que devem aparecer quando o slide entra em foco. Combine com `.fl` / `.fr` / `.fs` para variar a direção da entrada.
 - **Delays de Animação:** Use classes de delay customizadas (ex: `d2`, `d3`, `d4`) para criar sequências de aparição.
 - **Componentes Reutilizáveis:**
-  - `<Lightning />`: Elemento visual de raios (essencial para a atmosfera).
-  - `<SlideHeader />`: Cabeçalho padrão de seção.
-  - `<Polaroid />`: Para exibir imagens com bordas estilizadas e rotação.
+  - `<Lightning />`: Elemento visual de raios (essencial para a atmosfera). **Importante:** o componente usa `class="absolute inset-0"`, e o CSS `.slide > * { position: relative }` sobrescreveria isso — por isso há uma regra explícita `.slide > .lightning { position: absolute; inset: 0; z-index: 1 }` em `global.css`. Se for criar outros elementos que precisam ser `position: absolute` como filhos diretos de `.slide`, adicione regra similar ou use `style="position: absolute"` inline.
+  - `<SlideHeader />`: Cabeçalho padrão de seção (HYBRIS logo centralizado + props `subtitle`, `label`, `sublabel`).
+  - `<Polaroid />`: Frame branco com sombra para fotos — props: `src`, `alt`, `rotate`, `width`, `height`. Usa `object-fit: cover`, então a foto é cropada para preencher o frame.
 
 ## 5. Diretrizes para Modificações de Layout
 1. **Preserve a Elegância:** Evite cores vibrantes genéricas (vermelho puro, azul puro). Mantenha-se na paleta de tons terrosos e metálicos.
@@ -47,17 +62,26 @@ Use sempre as cores estendidas em `tailwind.config.mjs`:
 ## 7. Estrutura de Arquivos
 
 ```
+public/
+  favicon.svg             # Bolt dourado em fundo ink (32x32 SVG)
+  images/                 # Fotos dos personagens/cenas extraídas do PDF — ver §11
 src/
   components/
-    Lightning.astro     # SVG animado do raio (decorativo/atmosférico)
-    Polaroid.astro      # Frame de polaroid — props: src, alt, rotate, width, height
-    SlideHeader.astro   # Cabeçalho de slide — props: subtitle, label, sublabel
+    Lightning.astro       # SVG animado do raio (decorativo/atmosférico)
+    Polaroid.astro        # Frame de polaroid — props: src, alt, rotate, width, height
+    SlideHeader.astro     # Cabeçalho de slide — props: subtitle, label, sublabel
   layouts/
-    Layout.astro        # HTML base, Google Fonts, Intersection Observer scripts
+    Layout.astro          # HTML base, Google Fonts, IntersectionObserver e
+                          # scroll-driven crossfade (--content-opacity)
   pages/
-    index.astro         # Página única com os 24 slides (fonte principal de conteúdo)
+    index.astro           # Página única com os 24 slides
   styles/
-    global.css          # Scroll-snap, animações .rv, grain, vignette, nav dots
+    global.css            # Scroll-snap, .rv, grain, vignette, nav-dots,
+                          # .card, .platform-tag, lightning rules, crossfade
+hybris-guide.txt          # Texto extraído do PDF, páginas separadas por
+                          # `=== PÁGINA N ===` — versionado, fonte de copywriting
+.claude/                  # Scripts auxiliares para agentes (gitignored):
+                          # snap.mjs, extract_images.py, render_pages.py, etc.
 ```
 
 ## 8. Deploy e Infraestrutura
