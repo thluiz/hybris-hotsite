@@ -1,0 +1,786 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Lightning from '../components/Lightning.astro';
+import SlideHeader from '../components/SlideHeader.astro';
+import Polaroid from '../components/Polaroid.astro';
+import '../styles/global.css';
+
+const slides = [
+  'cover','hybris-def','projeto','enredo1','enredo2',
+  'genero','estrutura','t1','ep01a','ep01b','ep01c',
+  'ep03a','ep03b','ep04','ep06','ep08a','ep08b','ep10',
+  'mitos','publico','cronograma','equipes','criadores','contato',
+];
+---
+<Layout title="Hybris World">
+
+  <!-- ══ NAV DOTS ══════════════════════════════════ -->
+  <nav id="nav-dots" aria-label="Navegação por seção">
+    {slides.map((id) => <a href={`#${id}`} title={id}></a>)}
+  </nav>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 01 · COVER                                    -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="cover" class="slide flex flex-col items-center justify-center">
+    <Lightning />
+    <div class="text-center z-10">
+      <p class="font-cinzel text-[0.7rem] tracking-[0.5em] text-white/60 uppercase mb-10 hero-a">
+        A Metron Original IP
+      </p>
+      <h1 class="hybris-logo hero-a" style="font-size:clamp(4rem,10vw,8rem);letter-spacing:0.2em;">
+        HYBRI<span class="s">S</span>
+      </h1>
+      <h2 class="font-cinzel text-white/70 tracking-[0.55em] uppercase mt-3 hero-a2"
+          style="font-size:clamp(1rem,2.5vw,1.8rem);">
+        World
+      </h2>
+      <p class="font-garamond italic text-white/50 mt-8 tracking-wide hero-a3"
+         style="font-size:clamp(0.85rem,1.4vw,1rem);">
+        Mitologia · Drama Épico · Crossmídia
+      </p>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hero-a3" style="animation-delay:1s;">
+      <svg class="w-5 h-5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 02 · O QUE É HYBRIS                           -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="hybris-def" class="slide flex flex-col">
+    <SlideHeader />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center text-center px-8 gap-6">
+      <h2 class="font-cinzel font-bold text-ink/80 rv" style="font-size:clamp(1.4rem,3vw,2.2rem);">
+        O que é <strong class="text-ink">Hybris</strong>&thinsp;?
+      </h2>
+      <div class="font-garamond text-ink/75 rv d2 space-y-4" style="font-size:clamp(1.1rem,2.2vw,1.55rem);max-width:560px;line-height:1.7;">
+        <p>No grego antigo, <strong class="text-ink font-semibold">Hybris</strong> era<br/>o orgulho ou insolência diante dos deuses.</p>
+        <p>O exagero da sua melhor qualidade.</p>
+        <p>O erro de medida que levava o herói<br/>à sua própria ruína.</p>
+      </div>
+      <!-- Greek column silhouette (CSS) -->
+      <div class="absolute right-0 bottom-0 w-64 opacity-20 pointer-events-none rv d4 fr" aria-hidden="true">
+        <svg viewBox="0 0 160 400" fill="currentColor" class="text-ink/60">
+          <!-- Capital (ionic volutes) -->
+          <ellipse cx="80" cy="30" rx="75" ry="18"/>
+          <rect x="30" y="40" width="100" height="12" rx="4"/>
+          <!-- Shaft -->
+          <rect x="55" y="52" width="50" height="300" rx="4"/>
+          <!-- Base -->
+          <rect x="30" y="350" width="100" height="12" rx="3"/>
+          <rect x="15" y="362" width="130" height="16" rx="4"/>
+          <rect x="5"  y="378" width="150" height="18" rx="5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 03 · PROJETO HYBRIS WORLD                     -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="projeto" class="slide flex flex-col">
+    <SlideHeader subtitle="Projeto" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center text-center px-8 gap-6">
+      <h2 class="font-cinzel font-bold text-ink rv text-section">Hybris World</h2>
+      <div class="font-garamond text-ink/75 rv d2 space-y-2" style="font-size:clamp(1.05rem,2vw,1.45rem);max-width:620px;line-height:1.7;">
+        <p>Hybris World é um projeto <strong class="text-ink">crossmídia</strong><br/>idealizado por <strong class="text-ink">Julio Camacho</strong>,<br/>a partir da série original</p>
+        <p class="font-garamond italic text-ink/90" style="font-size:clamp(1rem,1.8vw,1.3rem);">
+          "Hybris. Quando a Mitologia Encontra a Realidade"
+        </p>
+        <p>desenvolvida em parceria com <strong class="text-ink">Guilherme Schlogel</strong>.</p>
+      </div>
+      <!-- Platform tags -->
+      <div class="rv d4 flex flex-wrap justify-center gap-2 mt-2" style="max-width:680px;">
+        {['Livros Digitais','Audiolivros','Audiodramas','Graphic Novels',
+          'Jogos de Tabuleiro','Videogames','Animações','Experiências Imersivas'].map(p => (
+          <span class="font-cinzel text-[0.62rem] tracking-[0.18em] uppercase px-3 py-1 border border-ink/25 text-ink/60">
+            {p}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 04 · ENREDO — DEUSES E MORTAIS                -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="enredo1" class="slide flex flex-col">
+    <SlideHeader subtitle="Enredo" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center px-12 gap-8">
+      <h2 class="font-cinzel font-bold text-ink rv text-section">Enredo</h2>
+      <div class="grid grid-cols-2 gap-10 w-full max-w-4xl">
+        <div class="text-center rv d2">
+          <p class="font-cinzel text-ink/60 text-sm tracking-widest uppercase mb-4">Os Deuses</p>
+          <p class="font-garamond text-ink/75 text-body leading-relaxed">
+            Inspirada na Mitologia Greco-Romana, os principais mitos são reinterpretados<br/>no mundo contemporâneo.<br/><br/>
+            Os Deuses são <strong class="text-ink">Bilionários e Líderes Globais</strong>. Seus poderes sobrenaturais são substituídos por enormes fortunas e influência política.
+          </p>
+        </div>
+        <div class="text-center rv d3">
+          <p class="font-cinzel text-ink/60 text-sm tracking-widest uppercase mb-4">Os Mortais</p>
+          <p class="font-garamond text-ink/75 text-body leading-relaxed">
+            Os Mortais enfrentam seus dilemas cotidianos, alheios às forças que os manipulam.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 05 · ENREDO — APENAS O PÚBLICO               -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="enredo2" class="slide flex flex-col">
+    <SlideHeader subtitle="Enredo" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center text-center px-12">
+      <p class="font-cinzel text-ink/55 text-sm tracking-widest uppercase mb-6 rv">O Diferencial</p>
+      <p class="font-garamond text-ink/80 rv d2" style="font-size:clamp(1.5rem,3.5vw,2.8rem);max-width:700px;line-height:1.55;">
+        Apenas o <strong class="text-ink">Público</strong> enxerga<br/>a sinistra interação<br/>entre estes dois arcos narrativos.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 06 · GÊNERO                                   -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="genero" class="slide flex flex-col">
+    <SlideHeader />
+    <Lightning />
+    <div class="flex-1 flex flex-col px-10 py-4 gap-4">
+      <!-- Title block -->
+      <div class="rv">
+        <h2 class="font-cinzel font-bold text-ink" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">Hybris</h2>
+        <p class="font-garamond italic text-ink/65" style="font-size:clamp(0.9rem,1.6vw,1.1rem);">Gênero</p>
+      </div>
+      <!-- Main content row -->
+      <div class="flex flex-1 gap-6 items-start">
+        <!-- Left: two cards stacked -->
+        <div class="flex flex-col gap-4 flex-1">
+          <div class="card rv d2" style="max-width:480px;">
+            <p class="text-body leading-relaxed">
+              Hybris é um<br/>
+              <strong>Drama Épico Contemporâneo</strong>,<br/>
+              emocionalmente intenso, sofisticado<br/>
+              e visualmente marcante,<br/>
+              que combina
+            </p>
+          </div>
+          <div class="card rv d4" style="max-width:480px;">
+            <p class="text-body leading-relaxed">
+              <strong>Intriga Política</strong>, com jogos de poder e conspirações,<br/>
+              <strong>Suspense Psicológico</strong>, com graves dilemas éticos e<br/>
+              <strong>Romance Trágico</strong>, com paixões intensas<br/>
+              que culminam em destinos inevitáveis.
+            </p>
+          </div>
+        </div>
+        <!-- Right: storm photo (polaroid) -->
+        <div class="rv d3 fr flex-shrink-0 self-center" style="transform: rotate(-4deg) translateY(-10px);">
+          <Polaroid
+            src="/images/genero-storm.jpg"
+            alt="Tempestade elétrica sobre a cidade"
+            rotate={-4}
+            width="340px"
+            height="210px"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 07 · ESTRUTURA                                -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="estrutura" class="slide flex flex-col">
+    <SlideHeader label="Estrutura" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center text-center px-8 gap-5">
+      <h2 class="font-cinzel font-bold text-ink rv text-section">Hybris</h2>
+      <div class="font-garamond text-ink/80 rv d2" style="font-size:clamp(1.1rem,2.2vw,1.6rem);max-width:600px;line-height:1.7;">
+        <p>A série é composta de<br/>
+        <strong>05 temporadas</strong> com <strong>10 episódios</strong><br/>
+        de <strong>50 minutos</strong> cada<br/><br/>
+        em uma estrutura semi-antológica,<br/>
+        que combina dois arcos:</p>
+      </div>
+      <!-- Dual arc columns -->
+      <div class="grid grid-cols-2 gap-8 mt-4 w-full max-w-3xl">
+        <div class="text-right rv d3 fl">
+          <p class="font-garamond text-ink/70 text-body">Arco dos <strong class="text-ink text-[1.3em]">Deuses</strong></p>
+          <p class="font-garamond text-ink/60 text-sm leading-relaxed mt-2">
+            com uma trama contínua<br/>que percorre toda a temporada<br/>mudando dramaticamente<br/>as vidas dos mortais
+          </p>
+        </div>
+        <div class="text-left rv d3 fr">
+          <p class="font-garamond text-ink/70 text-body">Arco dos <strong class="text-ink text-[1.3em]">Mortais</strong></p>
+          <p class="font-garamond text-ink/60 text-sm leading-relaxed mt-2">
+            com novos protagonistas<br/>se sucedendo a cada dois episódios
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 08 · PRIMEIRA TEMPORADA                       -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="t1" class="slide flex flex-col">
+    <SlideHeader />
+    <Lightning />
+    <div class="flex-1 flex items-center px-10 gap-10">
+      <!-- Left text -->
+      <div class="flex flex-col gap-6 flex-1">
+        <h2 class="font-cinzel font-semibold text-ink/70 rv" style="font-size:clamp(1.2rem,2.5vw,2rem);">
+          Primeira Temporada
+        </h2>
+        <div class="rv d2">
+          <p class="font-garamond text-ink/70 text-body">Arco dos <strong class="text-ink text-[1.2em]">Deuses</strong></p>
+          <p class="font-garamond text-ink/60 text-sm mt-1">O embate épico entre <strong class="text-ink">Zeus</strong> e <strong class="text-ink">Gaia</strong></p>
+        </div>
+        <div class="rv d4">
+          <p class="font-garamond text-ink/70 text-body">Arco dos <strong class="text-ink text-[1.2em]">Mortais</strong></p>
+          <p class="font-garamond text-ink/60 text-sm mt-1">
+            e a atualização os mitos de<br/>
+            <strong class="text-ink">Medusa</strong>, <strong class="text-ink">Perseu</strong>, <strong class="text-ink">Midas</strong>,<br/>
+            <strong class="text-ink">Narciso</strong> e <strong class="text-ink">Belerofonte</strong>.
+          </p>
+        </div>
+      </div>
+      <!-- Right: show poster polaroid -->
+      <div class="rv d3 fr flex-shrink-0">
+        <div class="polaroid" style="padding:14px 14px 14px;border:3px solid #b8963a;">
+          <div style="width:340px;height:420px;">
+            <div class="img-ph" style="height:420px;width:340px;font-size:0.85rem;background:rgba(80,55,20,0.3);">
+              <div class="text-center">
+                <div class="hybris-logo text-white" style="font-size:2rem;">HYBRI<span class="s">S</span></div>
+                <p class="font-garamond text-white/60 text-xs mt-2">Primeira Temporada</p>
+                <p class="font-garamond italic text-white/50 text-xs mt-8">Quando a <strong>Mitologia</strong> encontra a <strong>Realidade</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 09 · SINOPSE Eps 01–02 · Theo Makris (Zeus)   -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep01a" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódios 01 e 02" />
+    <Lightning />
+    <div class="flex-1 flex items-center gap-8 px-10 pb-10">
+      <!-- Character portrait -->
+      <div class="rv fl flex-shrink-0">
+        <Polaroid src="/images/theo-makris.jpg" alt="Theo Makris" rotate={-3} width="210px" height="270px" />
+      </div>
+      <!-- Synopsis card (center) -->
+      <div class="flex-1 rv d2">
+        <div class="card text-body leading-relaxed" style="max-width:520px;text-align:justify;">
+          <p>
+            Brilhante, prepotente e movido por uma ambição sem freios, <strong>Theo Makris</strong>, o poderoso magnata da <strong>Olympus Corporation</strong>, está prestes a alterar, de forma definitiva, a matriz energética do planeta.
+          </p>
+          <p class="mt-3">
+            Ignorando os alertas da ciência e da ética, pretende extrair energia elétrica acumulada nas nuvens em uma arriscada operação em escala global.
+          </p>
+          <p class="mt-3">
+            O Projeto <strong>Thunderbolt</strong> desafia os limites da tecnologia e da própria natureza, mas se bem-sucedido, concentrará em suas mãos um poder sem precedentes na humanidade.
+          </p>
+        </div>
+      </div>
+      <!-- Building photo -->
+      <div class="rv d4 fr flex-shrink-0">
+        <Polaroid src="/images/olympus-building.jpg" alt="Olympus Corporation" rotate={4} width="210px" height="320px" />
+      </div>
+    </div>
+    <p class="attribution pb-4 rv d5">
+      No Universo da Hybris, Theo Makris é <strong>Zeus</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 10 · SINOPSE Eps 01–02 · Alana e Melissa      -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep01b" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódios 01 e 02" />
+    <Lightning />
+    <div class="flex-1 flex items-center gap-8 px-10 pb-10">
+      <div class="flex-1 rv fl">
+        <div class="card text-body" style="max-width:520px;text-align:justify;">
+          <p>
+            <strong>Alana</strong> barra o investimento de <strong>Norman</strong> e na tentativa de salvar seu projeto, <strong>Melissa</strong> cai em uma armadilha que culmina em um ato de violência brutal, seguida por uma cruel campanha de difamação, com fotos íntimas suas vazadas.
+          </p>
+          <p class="mt-3">
+            Consumida pela decepção e orgulho, sem piedade, <strong>Alana</strong> expulsa sua pupila do mundo científico, expondo-a sob os holofotes do escândalo.
+          </p>
+        </div>
+      </div>
+      <div class="flex-1 rv d3 fr">
+        <div class="card text-body" style="max-width:520px;text-align:justify;">
+          <p>
+            Traumatizada e abandonada, <strong>Melissa</strong> acaba envenenada pela mesma neurotoxina que assombra o passado de Alana. O veneno, somado à injustiça e à exposição brutal, consome o que resta de sua sanidade.
+          </p>
+          <p class="mt-3">
+            Em um surto psicótico, ela provoca uma primeira morte acidental. Logo depois, agora intencionalmente, a de um policial que a investiga, ameaçando desencadear uma espiral de crimes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 11 · SINOPSE Eps 01–02 · Peter Argson         -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep01c" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódios 01 e 02" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center px-12 gap-6">
+      <div class="card rv text-body" style="max-width:580px;text-align:justify;">
+        <p>
+          <strong>Peter Argson</strong>, um investigador novato que ainda acredita em justiça, é colocado em seu caminho, ao mesmo tempo em que o confronto entre <strong>Norman</strong> e <strong>Alana</strong> traz à tona uma triste revelação que leva a um dos desfechos mais trágicos da mitologia.
+        </p>
+      </div>
+    </div>
+    <p class="attribution pb-6 rv d3">
+      No Universo da Hybris, Peter Argson é <strong>Perseu</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 12 · SINOPSE Ep 03 · Guan Duo Lin             -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep03a" class="slide flex flex-col">
+    <SlideHeader label="Sinopses" sublabel="Episódio 03" />
+    <Lightning />
+    <div class="flex-1 flex items-center gap-6 px-10 pb-10">
+      <!-- Left portrait -->
+      <div class="rv fl flex-shrink-0">
+        <Polaroid src="/images/guan-duo-lin.jpg" alt="Guan Duo Lin" rotate={-4} width="220px" height="280px" />
+      </div>
+      <!-- Center card -->
+      <div class="flex-1 rv d2">
+        <div class="card text-body" style="max-width:440px;text-align:justify;">
+          <p>
+            Na tentativa de se proteger dos planos de Theo, a simpática e poderosa latifundiária <strong>Guan Duo Lin</strong> reforça suas conexões com <strong>Saul</strong> e <strong>Preston</strong>, transformando esse elo em um jogo de manipulações cheio de traições e espionagem.
+          </p>
+        </div>
+      </div>
+      <!-- Right: stacked portraits -->
+      <div class="flex flex-col gap-4 flex-shrink-0 rv d3 fr">
+        <Polaroid src="/images/saul-heliot.jpg" alt="Saul Heliot" rotate={3} width="180px" height="220px" />
+        <Polaroid src="/images/preston.jpg" alt="Preston" rotate={-3} width="180px" height="220px" />
+      </div>
+    </div>
+    <p class="attribution pb-4 rv d4">
+      No Universo da Hybris, Guan Duo Lin é <strong>Gaia</strong>, Saul Heliot é <strong>Hélio</strong> e Preston é <strong>Prometeu</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 13 · SINOPSE Ep 03 · Monika Guan / Peter      -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep03b" class="slide flex flex-col">
+    <SlideHeader label="Sinopses" sublabel="Episódio 03" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center gap-6 px-12">
+      <div class="grid grid-cols-2 gap-8 w-full max-w-4xl">
+        <div class="card rv fl text-body" style="text-align:justify;">
+          <p>
+            <strong>Theo Makris</strong>, por sua vez, segue estruturando seus ardis, aliando-se agora à filha de Guan Duo Lin, a renomada advogada <strong>Monika Guan</strong>, que atua como uma agente dupla e torna-se uma peça central no desfecho da trama.
+          </p>
+        </div>
+        <div class="card rv d2 fr text-body" style="text-align:justify;">
+          <p>
+            Nem mesmo o heróico salvamento de <strong>Andrea</strong> (Andrômeda) consegue tirar <strong>Peter</strong> da depressão pelo assassinato involuntário de Melissa. Ao mesmo tempo, ele precisa lidar com as consequências legais de seus atos e com chantagens sofridas.
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="attribution pb-6 rv d4">
+      No Universo da Hybris, Monika Guan é <strong>Mnemosine</strong> e Andrea é <strong>Andrômeda</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 14 · SINOPSE Eps 04–05 · Midas                -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep04" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódios 04 e 05" />
+    <Lightning />
+    <div class="flex-1 flex items-center gap-8 px-10 pb-10">
+      <div class="flex-1 rv fl">
+        <div class="card text-body" style="max-width:520px;text-align:justify;">
+          <p>
+            <strong>Matthew Fletcher</strong>, ourives viúvo, divide-se entre sua compulsão pelo ouro e o resgate da tutela, perdida por negligência, de sua adorável filha — que tem uma rara alergia ao metal.
+          </p>
+          <p class="mt-3">
+            Após uma briga, é levado a <strong>Dennis Bacelli</strong>, que lhe faz uma proposta irrecusável. Sem ter com quem deixar a filha <strong>Chloe</strong>, vê-se obrigado a levá-la a um ambiente completamente inapropriado.
+          </p>
+          <p class="mt-3">
+            Em uma sequência de erros e negligências, Chloe desencadeia uma reação alérgica severa que a leva ao coma. Enquanto se agarra à tênue esperança de sobrevivência da filha, Matthew repensa seus valores e prioridades.
+          </p>
+        </div>
+      </div>
+      <div class="rv d3 fr flex-shrink-0">
+        <Polaroid src="/images/matthew-fletcher.jpg" alt="Matthew Fletcher" rotate={3} width="220px" height="280px" />
+      </div>
+    </div>
+    <p class="attribution pb-4 rv d4">
+      No Universo da Hybris, Matthew é <strong>Midas</strong> e Dennis é <strong>Dionísio</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 15 · SINOPSE Eps 06–07 · Narciso              -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep06" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódios 06 e 07" />
+    <Lightning />
+    <div class="flex-1 flex items-center gap-8 px-10 pb-10">
+      <div class="rv fl flex-shrink-0">
+        <Polaroid src="/images/neville-beaumont.jpg" alt="Neville Beaumont" rotate={-3} width="220px" height="280px" />
+      </div>
+      <div class="flex-1 rv d2">
+        <div class="card text-body" style="max-width:540px;text-align:justify;">
+          <p>
+            <strong>Neville Beaumont</strong>, deslumbrado com a fama meteórica em sua carreira de modelo internacional, mergulha em uma espiral de autodestruição alimentada por um abuso de álcool e drogas.
+          </p>
+          <p class="mt-3">
+            <strong>Anna</strong>, uma maquiadora simples e introspectiva, é a única pessoa capaz de romper este isolamento de Neville em si mesmo, trazendo a esperança de cura e amor.
+          </p>
+          <p class="mt-3">
+            A soberba de Neville o coloca em rota de colisão com a poderosa <strong>Vanessa</strong>, o que culmina em seu fim trágico.
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="attribution pb-4 rv d4">
+      No Universo da Hybris, Neville é <strong>Narciso</strong>, Anna é a ninfa <strong>Eco</strong> e Vanessa é <strong>Afrodite</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 16 · SINOPSE Eps 08–09 · Belerofonte          -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep08a" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódios 08 e 09" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center gap-6 px-12">
+      <div class="grid grid-cols-2 gap-8 w-full max-w-4xl">
+        <div class="card rv fl text-body" style="text-align:justify;">
+          <p>
+            Inicia-se na Trident a trajetória de <strong>Benedict Ashvendra</strong>, ambicioso advogado que, submetido a um inusitado teste de lealdade, rapidamente ganha a confiança de <strong>Norman</strong>.
+          </p>
+          <p class="mt-3">
+            Sua primeira missão é subornar o médico legista <strong>Cameron MacFyrell</strong> para ocultar evidências sobre a morte de Melissa. Bem-sucedido em todas as suas missões, Benedict começa a almejar saltos maiores.
+          </p>
+        </div>
+        <div class="card rv d2 fr text-body" style="text-align:justify;">
+          <p>
+            Dominado pela hybris, Benedict invade a sala da presidência e confronta <strong>Theo</strong> com os documentos da fraude.
+          </p>
+          <p class="mt-3">
+            Diante das ameaças de Benedict — a única pessoa que conhece as mentiras por trás do Thunderbolt —, Theo, em um movimento súbito, projeta o rapaz do alto do <strong>Olympus Building</strong>, selando seu destino trágico.
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="attribution pb-6 rv d4">
+      No Universo da Hybris, Benedict é <strong>Belerofonte</strong> e Cameron é <strong>Quimera</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 17 · SINOPSE Eps 08–09 · Desastre Thunderbolt -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep08b" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódios 08 e 09" />
+    <Lightning />
+    <div class="flex-1 flex items-center gap-8 px-10 pb-10">
+      <div class="flex-1 rv fl">
+        <div class="card text-body" style="max-width:500px;text-align:justify;">
+          <p>
+            A instalação da colossal usina do Thunderbolt em <strong>Emei Shan</strong>, na China, é finalmente concluída, desconsiderando inúmeros aspectos críticos de segurança.
+          </p>
+          <p class="mt-3">
+            Por conta da sabotagem, a ativação do sistema desencadeia um <strong>desastre ecológico de proporções globais</strong>, gerando tempestades elétricas secas e incêndios devastadores, com consequências inimagináveis.
+          </p>
+        </div>
+      </div>
+      <div class="rv d3 fr flex-shrink-0">
+        <Polaroid src="/images/thunderbolt-disaster.jpg" alt="Desastre do Thunderbolt em Emei Shan" rotate={-5} width="360px" height="220px" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 18 · SINOPSE Ep 10 · Season Finale            -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="ep10" class="slide flex flex-col">
+    <SlideHeader label="Sinopse" sublabel="Episódio 10 — Season Finale" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center px-12 gap-6">
+      <div class="card rv text-body" style="max-width:700px;text-align:justify;">
+        <p>
+          Os Arcos dos Deuses e dos Mortais fundem-se no episódio final de Hybris. A primeira temporada encerra-se em um clima de tensão absoluta, na iminência de um desastre global e a derrocada moral e física de seus protagonistas.
+        </p>
+        <p class="mt-3">
+          Tendo aparentemente contornado todos os problemas, <strong>Theo</strong> busca isolamento em sua sala — mas sua cadeira está ocupada por <strong>Hayden Makris</strong>, seu irmão há décadas mergulhado no total anonimato, com centenas de operações na Dark Web.
+        </p>
+        <p class="mt-3">
+          Uma verdadeira guerra familiar e acerto de contas pelo passado estão apenas começando.
+        </p>
+      </div>
+    </div>
+    <p class="attribution pb-6 rv d3">
+      No Universo da Hybris, Hayden Makris é <strong>Hades</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 19 · MITOS NAS 5 TEMPORADAS                   -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="mitos" class="slide flex flex-col">
+    <SlideHeader subtitle="World" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center px-10 gap-6">
+      <h2 class="font-cinzel font-bold text-ink rv text-section">Mitos nas Cinco Temporadas</h2>
+      <div class="rv d2 w-full max-w-5xl overflow-x-auto">
+        <table class="w-full font-garamond text-ink/75" style="font-size:clamp(0.75rem,1.2vw,0.95rem);border-collapse:collapse;">
+          <thead>
+            <tr class="border-b-2 border-ink/20">
+              <th class="font-cinzel text-left text-ink py-2 px-3 tracking-wide" style="font-size:0.72rem;">Temporada</th>
+              <th class="font-cinzel text-ink py-2 px-3 tracking-wide" style="font-size:0.72rem;">Arco dos Deuses</th>
+              <th class="font-cinzel text-ink py-2 px-3 tracking-wide" style="font-size:0.72rem;">Mitos dos Mortais / Semideuses</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { s:'1ª', gods:'Zeus × Gaia', mortals:'Medusa · Perseu · Midas · Narciso · Belerofonte' },
+              { s:'2ª', gods:'Zeus × Hades', mortals:'Cadmo · Jasão & Medéia · Teseu · Dédalo & Ícaro · Asclépio' },
+              { s:'3ª', gods:'Zeus × Poseidon', mortals:'Hércules · Orfeu · Adônis · Sísifo · Teseu e Pírito' },
+              { s:'4ª', gods:'A Ilíada', mortals:'Aquiles · Pátroclo · Helena · Menelau · Cassandra · Ajax' },
+              { s:'5ª', gods:'A Odisseia', mortals:'Odisseu · Polifemo · Circe · Penélope · Calipso · Orestes' },
+            ].map((row, i) => (
+              <tr class={`border-b border-ink/10 ${i % 2 === 1 ? 'bg-ink/5' : ''}`}>
+                <td class="font-cinzel font-semibold text-ink py-3 px-3">{row.s}</td>
+                <td class="italic text-ink/80 py-3 px-3 text-center">{row.gods}</td>
+                <td class="text-ink/65 py-3 px-3 text-center">{row.mortals}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 20 · PÚBLICO-ALVO                             -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="publico" class="slide flex flex-col">
+    <SlideHeader subtitle="Público-Alvo da Hybris" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center px-12 gap-8">
+      <p class="font-garamond text-ink/75 text-center rv text-body max-w-xl">
+        Homens e mulheres em equilibrada proporção, que buscam narrativas sofisticadas e envolventes,<br/>
+        com distribuição etária equilibrada e padrão financeiro médio-alto.
+      </p>
+      <div class="grid grid-cols-3 gap-10 w-full max-w-3xl">
+        <!-- Gender -->
+        <div class="text-center rv d2">
+          <p class="font-cinzel text-ink/55 text-[0.68rem] tracking-widest uppercase mb-4">Gênero</p>
+          <div class="flex justify-center gap-6">
+            {[{l:'Masculino',v:'55%'},{l:'Feminino',v:'45%'}].map(g => (
+              <div>
+                <span class="font-cinzel font-black text-ink/80 text-2xl">{g.v}</span>
+                <p class="font-garamond text-ink/55 text-xs mt-1">{g.l}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-3 h-2 rounded-full bg-ink/10 overflow-hidden">
+            <div class="h-full rounded-full bg-ink/40" style="width:55%"></div>
+          </div>
+        </div>
+        <!-- Age -->
+        <div class="rv d3">
+          <p class="font-cinzel text-ink/55 text-[0.68rem] tracking-widest uppercase mb-3 text-center">Faixa Etária</p>
+          <div class="space-y-2">
+            {[{l:'18–34 anos',v:45},{l:'35–49 anos',v:35},{l:'50–59 anos',v:12},{l:'60+ anos',v:8}].map(a => (
+              <div>
+                <div class="flex justify-between font-garamond text-ink/55 text-xs mb-1">
+                  <span>{a.l}</span><span>{a.v}%</span>
+                </div>
+                <div class="h-1.5 rounded-full bg-ink/10 overflow-hidden">
+                  <div class="h-full rounded-full bg-ink/40" style={`width:${a.v}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <!-- Income -->
+        <div class="rv d4">
+          <p class="font-cinzel text-ink/55 text-[0.68rem] tracking-widest uppercase mb-3 text-center">Renda</p>
+          <div class="space-y-2">
+            {[{l:'Média',v:50},{l:'Alta',v:35},{l:'Baixa',v:15}].map(r => (
+              <div>
+                <div class="flex justify-between font-garamond text-ink/55 text-xs mb-1">
+                  <span>{r.l}</span><span>{r.v}%</span>
+                </div>
+                <div class="h-1.5 rounded-full bg-ink/10 overflow-hidden">
+                  <div class="h-full rounded-full bg-ink/40" style={`width:${r.v}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 21 · CRONOGRAMA                               -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="cronograma" class="slide flex flex-col">
+    <SlideHeader subtitle="Cronograma de Lançamentos" />
+    <Lightning />
+    <div class="flex-1 flex flex-col items-center justify-center px-12 gap-6">
+      <h2 class="font-cinzel font-bold text-ink/80 rv" style="font-size:clamp(1.2rem,2.2vw,1.8rem);">2026</h2>
+      <div class="rv d2 w-full max-w-2xl space-y-5">
+        {[
+          { p:'Livros Digitais',     d:'Mar 2024', note:'Lançado' },
+          { p:'Audiolivros',         d:'Mar 2025', note:'Lançado' },
+          { p:'Graphic Novels',      d:'Nov 2025', note:'Lançado' },
+          { p:'Audiodramas',         d:'Dez 2025', note:'Lançado' },
+          { p:'Board Games',         d:'Nov 2026', note:'Em produção' },
+        ].map(item => (
+          <div class="flex items-center gap-6">
+            <div class="w-24 text-right font-cinzel text-ink/50 text-xs tracking-wide shrink-0">{item.d}</div>
+            <div class="w-2 h-2 rounded-full bg-ink/40 shrink-0"></div>
+            <div>
+              <p class="font-cinzel text-ink/80 text-sm font-semibold tracking-wide">{item.p}</p>
+              <p class="font-garamond text-ink/50 text-xs italic">{item.note}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 22 · EQUIPES                                  -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="equipes" class="slide flex flex-col">
+    <SlideHeader subtitle="Equipes" />
+    <Lightning />
+    <div class="flex-1 flex flex-col justify-center px-10 gap-5">
+      <div class="grid grid-cols-3 gap-6">
+        {[
+          { dept:'Direção', members:[
+            {n:'Julio Camacho',r:'Produtor Executivo'},
+            {n:'Leo Miranda',r:'Diretor'},
+            {n:'Gil Farias',r:'Produtor'},
+            {n:'Fernando Bastos',r:'Produtor'},
+            {n:'Camila Agrello',r:'Gerente Comercial'},
+          ]},
+          { dept:'Comunicação', members:[
+            {n:'Marcia Moura',r:'Coord. de Marketing'},
+            {n:'Marcelo Fazzio',r:'Contato com Players'},
+          ]},
+          { dept:'Livros Digitais', members:[
+            {n:'Rafael Doyle',r:'Escritor'},
+            {n:'Alex Rangel',r:'Tradutor'},
+          ]},
+          { dept:'Audiolivros & Audiodramas', members:[
+            {n:'Tiago Leite',r:'Produtor'},
+            {n:'Vitor Nonno',r:'Dublador'},
+            {n:'Vinicius Marchini',r:'Editor de Áudio'},
+          ]},
+          { dept:'Quadrinhos', members:[
+            {n:'Kaue Leone',r:'Arte-finalista'},
+            {n:'Thiago Sousa',r:'Desenhista'},
+            {n:'Beatriz Ramos',r:'Colorista'},
+          ]},
+          { dept:'Board Games', members:[
+            {n:'Thiago Silva',r:'Game Producer'},
+            {n:'Filipe Sobreira',r:'Game Designer'},
+            {n:'Henrique Jardim',r:'Game Designer'},
+          ]},
+        ].map((dept, i) => (
+          <div class={`rv d${i + 1}`} style={`border-top: 2px solid rgba(61,43,31,0.25); padding-top:0.75rem;`}>
+            <p class="font-cinzel text-ink/70 text-[0.65rem] tracking-widest uppercase mb-3">{dept.dept}</p>
+            <ul class="space-y-2">
+              {dept.members.map(m => (
+                <li>
+                  <p class="font-cinzel text-ink/85 text-sm font-medium">{m.n}</p>
+                  <p class="font-garamond text-ink/55 text-xs italic">{m.r}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 23 · CRIADORES                                -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="criadores" class="slide flex flex-col">
+    <SlideHeader subtitle="Criadores do Hybris World" />
+    <Lightning />
+    <div class="flex-1 flex items-center gap-12 px-16 pb-8">
+      <div class="flex-1 rv fl space-y-4">
+        <h3 class="font-cinzel font-bold text-ink text-section">Julio Camacho</h3>
+        <p class="font-cinzel text-ink/55 text-xs tracking-widest uppercase">CCO · Metron Showrunners</p>
+        <div class="h-px bg-ink/20 w-24"></div>
+        <p class="font-garamond text-ink/75 text-body leading-relaxed">
+          Idealizador, Produtor Executivo da franquia e Roteirista da série Hybris. Autor de obras de ficção e não-ficção, destaca-se por narrativas originais, linguagem envolvente e formatos inovadores que conquistam e impactam públicos amplos.
+        </p>
+        <p class="font-cinzel text-ink/50 text-xs tracking-widest">Escritor · Psicólogo · Mestre de Kung Fu</p>
+      </div>
+      <div class="flex-1 rv d3 fr space-y-4">
+        <h3 class="font-cinzel font-bold text-ink text-section">Guilherme Schlogel</h3>
+        <p class="font-cinzel text-ink/55 text-xs tracking-widest uppercase">Especialista em Mitologia Greco-Romana</p>
+        <div class="h-px bg-ink/20 w-24"></div>
+        <p class="font-garamond text-ink/75 text-body leading-relaxed">
+          Corresponsável pela criação da trama de Hybris e consultor criativo da franquia. Com mais de 1,42 milhões de inscritos no YouTube e inúmeros vídeos entre 3 e 5 milhões de visualizações, consolidou-se como o principal canal de mitologia do Brasil.
+        </p>
+        <p class="font-cinzel text-ink/50 text-xs tracking-widest">Autor · Consultor Criativo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 24 · CONTATO                                  -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="contato" class="slide flex flex-col items-center justify-center gap-8">
+    <Lightning />
+    <a href="#cover" class="hybris-logo rv" style="font-size:2rem;">HYBRI<span class="s">S</span></a>
+    <div class="text-center rv d2 space-y-6">
+      <div>
+        <p class="font-cinzel text-ink/50 text-[0.65rem] tracking-widest uppercase mb-2">E-mail</p>
+        <a href="mailto:metron@hybris.world" class="font-cinzel text-ink/80 hover:text-ink transition-colors"
+           style="font-size:clamp(0.9rem,1.6vw,1.2rem);">
+          metron@hybris.world
+        </a>
+      </div>
+      <div>
+        <p class="font-cinzel text-ink/50 text-[0.65rem] tracking-widest uppercase mb-2">Telefone</p>
+        <a href="tel:+17542179726" class="font-cinzel text-ink/80 hover:text-ink transition-colors"
+           style="font-size:clamp(0.9rem,1.6vw,1.2rem);">
+          +1 (754) 217-9726
+        </a>
+      </div>
+    </div>
+    <div class="h-px bg-ink/20 w-24 rv d3"></div>
+    <p class="font-cinzel text-ink/40 text-[0.65rem] tracking-widest uppercase rv d4">A Metron Original IP</p>
+  </section>
+
+</Layout>

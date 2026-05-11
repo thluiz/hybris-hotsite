@@ -1,0 +1,59 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'Hybris World' } = Astro.props;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Hybris World — Projeto crossmídia épico inspirado na mitologia greco-romana." />
+    <meta name="theme-color" content="#b09060" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Reveal elements when their parent slide is 50%+ visible
+      const slideObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.querySelectorAll('.rv').forEach((el) => {
+                el.classList.add('visible');
+              });
+            }
+          });
+        },
+        { threshold: 0.45 }
+      );
+      document.querySelectorAll('.slide').forEach((s) => slideObs.observe(s));
+
+      // Nav dot active state
+      const dots = document.querySelectorAll('#nav-dots a');
+      const slides = document.querySelectorAll('.slide');
+      const dotObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const idx = Array.from(slides).indexOf(entry.target as Element);
+            if (entry.isIntersecting && idx >= 0 && dots[idx]) {
+              dots.forEach((d) => d.classList.remove('active'));
+              dots[idx].classList.add('active');
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+      slides.forEach((s) => dotObs.observe(s));
+    </script>
+  </body>
+</html>
