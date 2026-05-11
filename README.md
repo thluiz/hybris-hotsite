@@ -77,9 +77,10 @@ Página de apresentação única (pitch deck interativo) com 24 slides em scroll
 |---|---|
 | Framework | Astro 4 (saída estática) |
 | CSS | Tailwind CSS 3 + CSS customizado |
-| Fontes | Cinzel (títulos) + EB Garamond (corpo) |
+| Fontes | Cinzel (títulos) · Cormorant Garamond (corpo) · Special Elite (typewriter) |
 | Hosting | AWS S3 + CloudFront |
 | CI/CD | GitHub Actions |
+| Dev tools | Playwright (devDep) — para agentes IA validarem visualmente |
 
 ---
 
@@ -99,7 +100,7 @@ npm install
 
 ```bash
 npm run dev
-# http://localhost:4321
+# http://localhost:4321 (ou 4323 se a porta estiver ocupada)
 ```
 
 ### Build de produção
@@ -115,6 +116,14 @@ pwsh -NoProfile -File deploy.ps1
 ```
 
 O script faz build, sincroniza com o S3 e invalida o cache do CloudFront.
+
+### Assets de imagem
+
+Fotos de personagens e cenas em `public/images/` são extraídas do PDF do guia. O fluxo (scripts em `.claude/`, gitignored) está documentado em **AGENTS.md §11**.
+
+### Continuidade do trabalho
+
+`AGENTS.md` é a fonte canônica de design tokens, padrões técnicos, gotchas conhecidos (lightning position, opacidades de texto sobre pergaminho, extração de imagens com labels burnados) e workflow do agente. Releia antes de retomar uma sessão.
 
 ---
 
