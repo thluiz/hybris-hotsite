@@ -13,7 +13,8 @@ Este documento serve como a "Fonte da Verdade" para agentes de IA que realizam m
 - **Estilização:** Tailwind CSS (Vanilla CSS para efeitos complexos).
 - **Tipografia** (definida em `tailwind.config.mjs` → `fontFamily`):
   - `font-cinzel` → **Cinzel**: títulos, logotipos e elementos épicos.
-  - `font-garamond` → **Cormorant Garamond**: texto-corpo, descrições e citações. (O PDF usa American Typewriter no corpo, que é proprietária Apple; Cormorant Garamond foi escolhida como Google-Font próxima do estilo das sinopses do PDF.) **Atenção**: Cormorant Regular (400) é muito fina sobre pergaminho — o `body` em `global.css` usa `font-weight: 500` como default. Para textos em destaque, use `600` ou `700`.
+  - `font-garamond` → **Bitter** (slab serif). É o body default sobre pergaminho. Foi escolhida porque Cormorant Garamond tem traços muito finos para ler bem sobre `#b09060` — Bitter sustenta o peso visual mais próximo do American Typewriter usado no PDF. Pesos carregados: 500, 600, 700, 800 (regular + italic 500/600). O `body` em `global.css` está em `font-weight: 500` por default — para títulos use `700` ou `800`. **Conserva o nome `font-garamond`** por compatibilidade com a base que herdamos; o conceito é "fonte de corpo do projeto".
+  - `font-cormorant` → **Cormorant Garamond**: alias explícito quando quiser as itálicas elegantes (tipicamente sobre o cover dark ou dentro de `.card`). A classe `.card` em `global.css` já aplica Cormorant automaticamente — não precisa adicionar `font-cormorant` em filhos de card.
   - `font-typewriter` → **Special Elite** (fallback Courier Prime, Courier, monospace): disponível para labels/captions tipo "máquina de escrever". Ainda não usado em nenhum slide; conecte se precisar de um terceiro registro tipográfico.
 - **Animações:**
   - `IntersectionObserver` em `Layout.astro` ativa a classe `.rv.visible` quando o slide tem 45%+ visível.
@@ -22,7 +23,7 @@ Este documento serve como a "Fonte da Verdade" para agentes de IA que realizam m
 
 ## 3. Sistema de Design (Tokens Tailwind)
 Use sempre as cores estendidas em `tailwind.config.mjs`:
-- `ink`: `#3d2b1f` (Cor principal do texto e elementos escuros).
+- `ink`: `#1a120a` (preto-amadeirado, cor principal do texto sobre pergaminho — escurecida do `#3d2b1f` original porque o ink antigo não dava contraste WCAG suficiente sobre parchment).
 - `parchment`: `#b09060` (Dourado envelhecido/bronze).
 - `gold`: `#d4a840` (Dourado vibrante).
 - `cream`: `#f0e8d0` (Fundo claro/papel).
@@ -35,9 +36,9 @@ Use sempre as cores estendidas em `tailwind.config.mjs`:
 - `.hybris-def-slide > .lightning` — variante mais sutil do raio (opacity 0.55, transladado), usada quando o lightning é uma "rachadura no pergaminho" e não o raio dramático da capa.
 
 ### Legibilidade sobre pergaminho
-- **Não use** `text-ink/55`, `text-ink/60`, `text-ink/75`, `text-ink/80` — Cormorant fica ilegível em ink translúcido sobre `#b09060`.
-- Use `text-ink` direto, ou no mínimo `text-ink/85` para labels e `text-ink/90`/`text-ink/95` para corpo.
-- Se for um bloco grande de texto sobre pergaminho, considere envolver em `.card` (mesma estética das sinopses do PDF) — slide 2 e várias sinopses fazem isso.
+- **Não use modificadores de opacity** (`text-ink/55`…`text-ink/95`) para texto-corpo — ink sobre parchment já está no limite. `text-ink/85` é tolerável **só** para labels Cinzel uppercase pequenas com tracking-widest, onde a leitura é cartão-identificador, não corpo. Tudo o mais: `text-ink` direto.
+- O `body` em `global.css` aplica um `text-shadow` muito sutil (`0 1px 0 rgba(176,144,96,0.4)`) que dá definição de borda aos traços. Não remova.
+- Se for um bloco grande de texto sobre pergaminho, considere envolver em `.card` — texto cream sobre fundo escuro lê bem mesmo com Cormorant.
 
 ## 4. Estrutura de Componentes e Layout
 - **Slides:** O site é uma sucessão de seções com a classe `.slide`. Cada seção ocupa 100vh com `scroll-snap-align: start`.
